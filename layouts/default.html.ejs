@@ -1,0 +1,21 @@
+---
+layout: header-footer.html.ejs
+---
+<div class="row">
+  <section id="breadcrumb" class="col-sm-12">
+    <breadcrumb-trail/>
+  </section>
+  <section id="category-tags" class="col-sm-12">
+    By: <author-link></author-link> <publication-date></publication-date>
+  </section>
+</div>
+<div class="row">
+  <article class="col-sm-10">
+    <% if (typeof teaser  !== "undefined") { %><p><strong><ak-teaser></ak-teaser></strong></p> <% } %>
+    <%- content %>
+    <!-- partial file-name='disqus.html'/ -->
+  </article>
+  <section id="right" class="col-sm-2">
+    <% if (typeof rightsidebar !== "undefined" && rightsidebar) { %><%- partial(rightsidebar) %><% } %>
+  </section>
+</div>

@@ -1,0 +1,23 @@
+{
+  "author": {
+    "name": "David Herron",
+    "email": "david@davidherron.com",
+    "url": "http://davidherron.com"
+  },
+  "name": "akashacms-skeleton",
+  "description": "AkashaCMS skeleton website",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/akashacms/akashacms-skeleton.git"
+  },
+  "dependencies": {
+    "akashacms": "*",
+    "akashacms-theme-bootstrap": "*",
+    "akashacms-breadcrumbs": "*",
+    "akashacms-booknav": "*",
+    "akashacms-embeddables": "*",
+    "akashacms-blog-podcast": "*",
+    "akashacms-social-buttons": "*",
+    "akashacms-base": "*"
+  }
+}
