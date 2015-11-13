@@ -9,7 +9,7 @@ module.exports = {
     
     // Root URL for the site this will generate
     // Change this to suite your site
-    root_url: "http://blog-skeleton.akashacms.com", 
+    root_url: "http://blog-skeleton.akashacms.com",
     
     doMinimize: false,
     
@@ -42,7 +42,7 @@ module.exports = {
     // Stuff for Google
     google: {
         analyticsAccount: "UA-#########-##",
-        analyticsDomain: "example.akashacms.com",
+        analyticsDomain: "blog-skeleton.akashacms.com",
         // siteVerification: "....."
     },
     
