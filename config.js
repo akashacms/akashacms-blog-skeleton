@@ -104,7 +104,7 @@ module.exports = {
     config: function(akasha) {
         akasha.registerPlugins([
 			{ name: 'akashacms-theme-bootstrap', plugin: require('akashacms-theme-bootstrap') },
-			{ name: 'akashacms-booknav', plugin: require('../akashacms-booknav') },
+			{ name: 'akashacms-booknav', plugin: require('akashacms-booknav') },
 			{ name: 'akashacms-breadcrumbs', plugin: require('akashacms-breadcrumbs') },
 			{ name: 'akashacms-embeddables', plugin: require('akashacms-embeddables') },
 			{ name: 'akashacms-blog-podcast', plugin: require('akashacms-blog-podcast') },
