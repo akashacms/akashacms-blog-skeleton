@@ -7,6 +7,9 @@
         <div class="blog-item">
             <!-- add teaser thumbnail -->
             <a href="/<%= doc.renderpath %>"><h3><%= doc.metadata.title %></h3></a>
+            <% if (doc.metadata.teaser) { %>
+                <p><%= doc.metadata.teaser %></p>
+            <% } %>
             <%
             // if (doc.metadata.videoUrls) {
             //     % ><a href="/< %= doc.renderpath % >">
