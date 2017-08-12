@@ -23,7 +23,6 @@
     "akashacms-booknav": "akashacms/akashacms-booknav",
     "akashacms-breadcrumbs": "akashacms/akashacms-breadcrumbs",
     "akashacms-embeddables": "akashacms/akashacms-embeddables",
-    "akashacms-social-buttons": "akashacms/akashacms-social-buttons",
     "akashacms-theme-bootstrap": "akashacms/akashacms-theme-bootstrap",
     "akasharender": ">=0.5",
     "bootstrap": "^3.3.7",

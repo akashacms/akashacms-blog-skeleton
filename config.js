@@ -29,8 +29,7 @@ config
     .use(require('akashacms-breadcrumbs'))
     .use(require('akashacms-booknav'))
     .use(require('akashacms-embeddables'))
-    .use(require('akashacms-blog-podcast'))
-    .use(require('akashacms-social-buttons'));
+    .use(require('akashacms-blog-podcast'));
 
 config.plugin("akashacms-base").generateSitemap(config, true);
 
