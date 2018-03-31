@@ -1,117 +1,103 @@
 
-module.exports = {
-    
-    root_assets: [ 'assets' ],
-    root_layouts: [ 'layouts' ],    // Directory for layout files
-    root_partials: [ 'partials' ],  // Directory for partials
-    root_out: 'out',                // Rendered output goes here
-    root_docs: [ 'documents' ],     // Directory/ies of input files
-    
-    // Root URL for the site this will generate
-    // Change this to suite your site
-    root_url: "http://blog-skeleton.akashacms.com",
-    
-    doMinimize: false,
-    
-    // If you're using akashacms-tagged-content
-    /* taggedContent: {
-        pathIndexes: '/tags/',
-        header: "---\ntitle: @title@\nlayout: tagpage.html.ejs\n---\n<p>Pages with tag @tagName@</p>"
-    }, */
-    
-    // Change this to suit your own server
-    deploy_rsync: {
-        user: 'user-name',
-        host: 'blog-skeleton.akashacms.com',
-        dir:  'blog-skeleton.akashacms.com'
-    },
-    
-    // Add any needed Mahabhuta functions here
-    mahabhuta: [
-    ],
-    
-    data: {
-        // Any objects put here are available in templates as data
-        metarobots: "index,follow",
-        metaOGtype: "website",
-        metaOGsite_name: "AkashaCMS example website",
-        metasubject: "AkashaCMS",
-        metalanguage: "EN",
-    },
-    
-    // Stuff for Google
-    google: {
-        analyticsAccount: "UA-#########-##",
-        analyticsDomain: "blog-skeleton.akashacms.com",
-        // siteVerification: "....."
-    },
-    
-    headerScripts: {
-        stylesheets: [
-            { href: "/css/style.css", media: "screen" }
-        ],
-        javaScriptTop: [
-        ],
-        javaScriptBottom: [
-        ]
-    },
-    
-    // embeddables: {
-    //     youtubeKey: '... retrieve your own key'
-    // },
-    
-    funcs: {
-        // Any functions put here are available in templates as functions
-    },
-    
-    /* log4js: {
-		appenders: [
-			{ type: "console" }
-		],
-		replaceConsole: true,
-    	levels: {
-    		"find": "TRACE",
-    		"fileCache": "TRACE",
-    		"renderer": "TRACE",
-    		"builtin": "INFO",
-    		"akashacms": "TRACE",
-    		"embeddables": "INFO",
-    		"[all]": "INFO"
-    	}
-    }, */
-    
-	blogPodcast: {
-		"news": {
-			rss: {
-				title: "AkashaCMS Blog Skeleton",
-				description: "Skeleton example blog",
-				site_url: "http://blog-skeleton.akashacms.com/blog/index.html",
-				image_url: "http://akashacms.com/logo.gif",
-				managingEditor: 'John Smith',
-				webMaster: 'John Smith',
-				copyright: '2015 John Smith',
-				language: 'en',
-				categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
-			},
-			rssurl: "/rss.xml",
-			matchers: {
-				layouts: [ "blog.html.ejs" ],
-				path: /^[0-9]*\//
-			}
-		}
-	},
-	
-    config: function(akasha) {
-        akasha.registerPlugins([
-			{ name: 'akashacms-theme-bootstrap', plugin: require('akashacms-theme-bootstrap') },
-			{ name: 'akashacms-booknav', plugin: require('akashacms-booknav') },
-			{ name: 'akashacms-breadcrumbs', plugin: require('akashacms-breadcrumbs') },
-			{ name: 'akashacms-embeddables', plugin: require('akashacms-embeddables') },
-			{ name: 'akashacms-blog-podcast', plugin: require('akashacms-blog-podcast') },
-			{ name: 'akashacms-social-buttons', plugin: require('akashacms-social-buttons') },
-			// { name: 'akashacms-tagged-content', plugin: require('akashacms-tagged-content') },
-			{ name: 'akashacms-base', plugin: require('akashacms-base') }
-        ]);
-    }
 
-};
+'use strict';
+
+const util    = require('util');
+const akasha  = require('akasharender');
+
+const config = new akasha.Configuration();
+
+config
+    .addAssetsDir('assets')
+    .addAssetsDir({
+        src: 'node_modules/bootstrap/dist',
+        dest: 'vendor/bootstrap'
+    })
+   .addAssetsDir({
+        src: 'node_modules/jquery/dist',
+        dest: 'vendor/jquery'
+    })
+    .addLayoutsDir('layouts')
+    .addDocumentsDir('documents')
+    .addPartialsDir('partials')
+    .setRenderDestination('out');
+
+config.rootURL("https://blog-skeleton.akashacms.com");
+
+config
+    .use(require('akashacms-theme-bootstrap'))
+    .use(require('akashacms-base'))
+    .use(require('akashacms-breadcrumbs'))
+    .use(require('akashacms-booknav'))
+    .use(require('akashacms-embeddables'))
+    .use(require('akashacms-blog-podcast'));
+
+config.plugin("akashacms-base").generateSitemap(config, true);
+
+config
+    .addFooterJavaScript({
+        href: "/vendor/jquery/jquery.min.js"
+    })
+    .addFooterJavaScript({
+        href: "/vendor/bootstrap/js/bootstrap.min.js"
+    })
+    .addStylesheet({
+        href: "/vendor/bootstrap/css/bootstrap.min.css"
+    })
+    .addStylesheet({
+        href: "/vendor/bootstrap/css/bootstrap-theme.min.css"
+    })
+    .addStylesheet({
+        href: "/style.css"
+    });
+
+config.setMahabhutaConfig({
+    recognizeSelfClosing: true,
+    recognizeCDATA: true
+});
+
+config.plugin('akashacms-blog-podcast')
+    .addBlogPodcast(config, "news", {
+        rss: {
+            title: "AkashaCMS Example Blog",
+            description: "Skeleton blog for use with AkashaCMS",
+            site_url: "http://blog-skeleton.akashacms.com/blog/index.html",
+            image_url: "http://akashacms.com/logo.gif",
+            managingEditor: 'David Herron',
+            webMaster: 'David Herron',
+            copyright: '2015 David Herron',
+            language: 'en',
+            categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
+        },
+        rssurl: "/blog/rss.xml",
+        rootPath: "blog",
+        matchers: {
+            layouts: [ "blog.html.ejs" ],
+            path: /^blog\//
+        }
+    });
+
+config.plugin('akashacms-blog-podcast')
+    .addBlogPodcast(config, "news-2", {
+        rss: {
+            title: "AkashaCMS Example Blog #2",
+            description: "Second Skeleton blog for use with AkashaCMS",
+            site_url: "http://blog-skeleton.akashacms.com/blog-2/index.html",
+            image_url: "http://akashacms.com/logo.gif",
+            managingEditor: 'David Herron',
+            webMaster: 'David Herron',
+            copyright: '2015 David Herron',
+            language: 'en',
+            categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
+        },
+        rssurl: "/blog-2/rss.xml",
+        rootPath: "blog-2",
+        matchers: {
+            layouts: [ "blog.html.ejs" ],
+            path: /^blog-2\//
+        }
+    });
+
+config.prepare();
+
+module.exports = config;

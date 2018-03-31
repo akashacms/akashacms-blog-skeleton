@@ -1,0 +1,27 @@
+<div class="blog-river">
+    <a href="<%- feedUrl %>"><img src="/img/rss_button.gif" align="right" width="50"/></a>
+    <%
+    for (var docno = 0; docno < documents.length; docno++) {
+        var doc = documents[docno];
+        %>
+        <div class="blog-item">
+            <!-- add teaser thumbnail -->
+            <a href="/<%= doc.renderpath %>"><h3><%= doc.metadata.title %></h3></a>
+            <% if (doc.metadata.teaser) { %>
+                <p><%= doc.metadata.teaser %></p>
+            <% } %>
+            <%
+            // if (doc.metadata.videoUrls) {
+            //     % ><a href="/< %= doc.renderpath % >">
+            //         <h3>< %= doc.metadata.title % ></h3>
+            //         <youtube-thumbnail href="< %= doc.metadata.videoUrls[0].url % >" title="< %= doc.metadata.title % >"></youtube-thumbnail>
+            //     </a>< %
+            // } else {
+            //     % ><a href="/< %= doc.renderpath % >"><h3>< %= doc.metadata.title % ></h3></a>< %
+            // }
+            %>
+        </div>
+        <%
+    }
+    %>
+</div>

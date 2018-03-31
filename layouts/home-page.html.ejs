@@ -33,23 +33,8 @@
 </div>
 
 <div class="row">
-  <section id="breadcrumb" class="col-sm-12">
-    <breadcrumb-trail></breadcrumb-trail>
-  </section>
-</div>
-<div class="row">
-  <section id="category-tags" class="col-sm-12">
-    <publication-date></publication-date>;
-        <tags-for-document/>
-  </section>
-</div>
-
-<div class="row">
   <article class="col-sm-10">
-    <% if (typeof teaser  !== "undefined") { %><p><strong><%= teaser %></strong></p> <% } %>
     <%- content %>
-    <blog-next-prev></blog-next-prev>
-    <partial file-name='disqus.html'></partial>
   </article>
   <section id="right" class="col-sm-2">
     <tag-cloud/>
