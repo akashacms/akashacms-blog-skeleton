@@ -17,20 +17,19 @@
     "url": "git://github.com/akashacms/akashacms-blog-skeleton.git"
   },
   "dependencies": {
-    "mahabhuta": ">=0.6.1",
     "akashacms-base": "akashacms/akashacms-base",
     "akashacms-blog-podcast": "akashacms/akashacms-blog-podcast",
     "akashacms-booknav": "akashacms/akashacms-booknav",
     "akashacms-breadcrumbs": "akashacms/akashacms-breadcrumbs",
     "akashacms-embeddables": "akashacms/akashacms-embeddables",
     "akashacms-theme-bootstrap": "akashacms/akashacms-theme-bootstrap",
-    "akasharender": ">=0.5",
+    "akasharender": ">=0.7",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.0",
     "async": ">=2.0.0-rc.4",
     "globfs": "*",
     "oembed": "^0.1.0",
     "html-minifier": "^3.1.1",
-    "hostr": "^2.x"
+    "hostr": "2.3.7"
   }
 }
