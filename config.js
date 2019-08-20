@@ -7,6 +7,8 @@ const akasha  = require('akasharender');
 
 const config = new akasha.Configuration();
 
+config.configDir = __dirname;
+
 config
     .addAssetsDir('assets')
     .addAssetsDir({

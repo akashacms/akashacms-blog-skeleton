@@ -10,7 +10,9 @@
   "scripts": {
     "prebuild": "rm -rf out/* && mkdir -p out && akasharender copy-assets config.js",
     "build": "akasharender render config.js",
-    "preview": "cd out && ../node_modules/.bin/hostr"
+    "preview": "cd out && ../node_modules/.bin/hostr",
+    "pretest": "npm run build",
+    "test": "cd test && mocha ./index"
   },
   "repository": {
     "type": "git",
@@ -23,13 +25,15 @@
     "akashacms-breadcrumbs": "akashacms/akashacms-breadcrumbs",
     "akashacms-embeddables": "akashacms/akashacms-embeddables",
     "akashacms-theme-bootstrap": "akashacms/akashacms-theme-bootstrap",
-    "akasharender": ">=0.7",
+    "akasharender": "akashacms/akasharender",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.0",
     "async": ">=2.0.0-rc.4",
     "globfs": "*",
     "oembed": "^0.1.0",
     "html-minifier": "^3.1.1",
-    "hostr": "2.3.7"
+    "hostr": "2.3.7",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
   }
 }
