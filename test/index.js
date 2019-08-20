@@ -5,9 +5,7 @@ const { assert } = require('chai');
 const config = require('../config.js');
 
 /* TODO update skeleton to use Bootstrap v4
-
-TODO test-akashacms-blog-podcast job that pulls down this repository
-     The job needs to trigger on changes to any of its dependencies */
+ */
 
 describe('build site', function() {
     it('should build site', async function() {
@@ -30,10 +28,6 @@ describe('check pages', function() {
 
         assert.exists(html, 'result exists');
         assert.isString(html, 'result isString');
-
-        /* FAILS because out/index.html is not right 
-        It needs to be ../out/index.html 
-        In config settng render destination should turn into absolute path */
 
         assert.include($('head title').html(), 'Blog Home Page');
         assert.include($('head meta[name="pagename"]').attr('content'), 
