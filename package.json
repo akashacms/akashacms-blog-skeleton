@@ -6,6 +6,7 @@
   },
   "name": "akashacms-blog-skeleton",
   "description": "AkashaCMS blog/podcast skeleton website",
+  "version": "0.7.2",
   "main": "config.js",
   "scripts": {
     "prebuild": "rm -rf out/* && mkdir -p out && akasharender copy-assets config.js",
