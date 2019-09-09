@@ -158,4 +158,23 @@ describe('check pages', function() {
 
 
     });
+
+    it('should have correct feeds page', async function() {
+
+        let { html, $ } = await akasha.readRenderedFile(config, 
+                '/feeds.html');
+
+        assert.exists(html, 'result exists');
+        assert.isString(html, 'result isString');
+
+        assert.equal($('#blog-feeds-all').length, 1);
+        assert.equal($('#blog-feeds-all a[href="/blog/rss.xml"]').length, 1);
+        assert.equal($('#blog-feeds-all a[href="/blog-2/rss.xml"]').length, 1);
+        assert.equal($('#blog-feeds-all img[src="/img/rss_button.gif"]').length, 2);
+
+        assert.include($('#blog-feeds-all li:nth-child(1)').html(),
+            "AkashaCMS Example Blog: Skeleton blog for use with AkashaCMS");
+        assert.include($('#blog-feeds-all li:nth-child(2)').html(),
+            "AkashaCMS Example Blog #2: Second Skeleton blog for use with AkashaCMS");
+    });
 });
