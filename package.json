@@ -6,12 +6,12 @@
   },
   "name": "akashacms-blog-skeleton",
   "description": "AkashaCMS blog/podcast skeleton website",
-  "version": "0.7.4",
+  "version": "0.7.6",
   "main": "config.js",
   "scripts": {
     "prebuild": "rm -rf out/* && mkdir -p out && akasharender copy-assets config.js",
     "build": "akasharender render config.js",
-    "preview": "cd out && ../node_modules/.bin/hostr",
+    "preview": "cd out && ws --log.format dev",
     "pretest": "npm run build",
     "test": "cd test && mocha ./index"
   },
@@ -33,7 +33,7 @@
     "globfs": "*",
     "oembed": "^0.1.0",
     "html-minifier": "^3.1.1",
-    "hostr": "2.3.7",
+    "local-web-server": "^3.0.7",
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }
