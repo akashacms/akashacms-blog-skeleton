@@ -178,3 +178,22 @@ describe('check pages', function() {
             "AkashaCMS Example Blog #2: Second Skeleton blog for use with AkashaCMS");
     });
 });
+
+
+describe('documents and index', function() {
+    it('should have correct documents', async function() {
+        let blogcfg = config.plugin('akashacms-blog-podcast').options.bloglist['news'];
+        let documents = await config.plugin('akashacms-blog-podcast').findBlogDocs(config, blogcfg);
+        assert.equal(documents.length, 4);
+        assert.equal(documents[0].docpath, 'blog/2015/11/test-post-2.html.md');
+        assert.equal(documents[1].docpath, 'blog/2015/11/test-post-1.html.md');
+        assert.equal(documents[2].docpath, 'blog/2015/09/test-post-2.html.md');
+        assert.equal(documents[3].docpath, 'blog/2015/09/test-post-1.html.md');
+    });
+
+    it('should have correct index', async function() {
+        let blogcfg = config.plugin('akashacms-blog-podcast').options.bloglist['news'];
+        let indexes = await config.plugin('akashacms-blog-podcast').findBlogIndexes(config, blogcfg);
+        assert.equal(indexes.length, 0);
+    });
+});
