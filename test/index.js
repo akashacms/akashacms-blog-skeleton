@@ -64,17 +64,17 @@ describe('check pages', function() {
                 'Example blog/podcast website for AkashaCMS');
         assert.equal($('h2:contains("Blog #1")').length, 1);
 
-        assert.include($('body a[href="/blog/2015/11/test-post-1.html"]').html(), 
+        assert.include($('body a[href="blog/2015/11/test-post-1.html"]').html(), 
                 'Test Post 1');
-        assert.include($('body a[href="/blog/2015/09/test-post-2.html"]').html(), 
+        assert.include($('body a[href="blog/2015/09/test-post-2.html"]').html(), 
                 'Test Post 2');
         
 
         assert.equal($('h2:contains("Blog #2")').length, 1);
 
-        assert.include($('body a[href="/blog-2/2015/11/test-post-1.html"]').html(), 
+        assert.include($('body a[href="blog-2/2015/11/test-post-1.html"]').html(), 
                 'Test Post 1');
-        assert.include($('body a[href="/blog-2/2015/11/test-post-2.html"]').html(), 
+        assert.include($('body a[href="blog-2/2015/11/test-post-2.html"]').html(), 
                 'Test Post 2');
         
     });
@@ -105,21 +105,17 @@ describe('check pages', function() {
         assert.include($('body header h1').html(), 
                 'Example blog/podcast website for AkashaCMS');
 
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/index.html"]').html(),
+        assert.include($('#breadcrumb ol.breadcrumb a[href="../../../index.html"]').html(),
                 'Blog Home Page');
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/blog/index.html"]').html(),
+        assert.include($('#breadcrumb ol.breadcrumb a[href="index.html"]').html(),
                 'Blog index');
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/blog/2015/index.html"]').html(),
-                'Blog index for 2015');
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/blog/2015/09/index.html"]').html(),
-                'Blog index for September, 2015');
 
         assert.include($('article strong').html(), 'This is a blog teaser');
         assert.include($('article').html(), 'Blog content');
 
-        assert.include($('.blog-prev-next-wrapper .blog-prev-link[href="/blog/2015/09/test-post-2.html"] span').html(),
+        assert.include($('.blog-prev-next-wrapper .blog-prev-link[href="test-post-2.html"] span').html(),
             'Test Post 2');
-        assert.include($('.blog-prev-next-wrapper .blog-next-link[href="/blog/2015/11/test-post-2.html"] span').html(),
+        assert.include($('.blog-prev-next-wrapper .blog-next-link[href="../11/test-post-2.html"] span').html(),
             'Test Post 2');
     });
 
@@ -148,28 +144,28 @@ describe('check pages', function() {
         assert.include($('body header h1').html(), 
                 'Example blog/podcast website for AkashaCMS');
 
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/index.html"]').html(),
+        assert.include($('#breadcrumb ol.breadcrumb a[href="../../../index.html"]').html(),
                 'Blog Home Page');
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/blog/index.html"]').html(),
+        assert.include($('#breadcrumb ol.breadcrumb a[href="../../index.html"]').html(),
                 'Blog index');
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/blog/2015/index.html"]').html(),
+        assert.include($('#breadcrumb ol.breadcrumb a[href="../index.html"]').html(),
                 'Blog index for 2015');
-        assert.include($('#breadcrumb ol.breadcrumb a[href="/blog/2015/09/index.html"]').html(),
+        assert.include($('#breadcrumb ol.breadcrumb a[href="index.html"]').html(),
                 'Blog index for September, 2015');
 
-        assert.include($('a[href="/blog/rss.xml"] img').attr('src'), 
-                '/img/rss_button.gif');
+        assert.include($('a[href="../../rss.xml"] img').attr('src'), 
+                '../../../img/rss_button.gif');
         
-        assert.include($('a[href="/blog/2015/11/test-post-2.html"] h2').html(), 
+        assert.include($('a[href="../11/test-post-2.html"] h2').html(), 
                 'Test Post 2');
         
-        assert.include($('a[href="/blog/2015/11/test-post-1.html"] h2').html(), 
+        assert.include($('a[href="../11/test-post-1.html"] h2').html(), 
                 'Test Post 1');
         
-        assert.include($('a[href="/blog/2015/09/test-post-2.html"] h2').html(), 
+        assert.include($('a[href="test-post-2.html"] h2').html(), 
                 'Test Post 2');
         
-        assert.include($('a[href="/blog/2015/09/test-post-1.html"] h2').html(), 
+        assert.include($('a[href="test-post-1.html"] h2').html(), 
                 'Test Post 1');
         
 
@@ -185,9 +181,9 @@ describe('check pages', function() {
         assert.isString(html, 'result isString');
 
         assert.equal($('#blog-feeds-all').length, 1);
-        assert.equal($('#blog-feeds-all a[href="/blog/rss.xml"]').length, 1);
-        assert.equal($('#blog-feeds-all a[href="/blog-2/rss.xml"]').length, 1);
-        assert.equal($('#blog-feeds-all img[src="/img/rss_button.gif"]').length, 2);
+        assert.equal($('#blog-feeds-all a[href="blog/rss.xml"]').length, 1);
+        assert.equal($('#blog-feeds-all a[href="blog-2/rss.xml"]').length, 1);
+        assert.equal($('#blog-feeds-all img[src="img/rss_button.gif"]').length, 2);
 
         assert.include($('#blog-feeds-all li:nth-child(1)').html(),
             "AkashaCMS Example Blog: Skeleton blog for use with AkashaCMS");
