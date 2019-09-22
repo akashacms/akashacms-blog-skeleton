@@ -27,5 +27,6 @@ build/Release
 node_modules
 
 out
+out-rebased
 
 package-lock.json

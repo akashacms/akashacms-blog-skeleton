@@ -1,6 +1,7 @@
 
 const akasha   = require('akasharender');
 const { assert } = require('chai');
+const fs = require('fs-extra');
 
 const config = require('../config.js');
 
@@ -9,6 +10,7 @@ const config = require('../config.js');
 
 describe('build site', function() {
     it('should build site', async function() {
+        this.timeout(25000);
         let failed = false;
         let results = await akasha.render(config);
         for (let result of results) {
@@ -18,6 +20,21 @@ describe('build site', function() {
             }
         }
         assert.isFalse(failed);
+    });
+});
+
+describe('check feed', function() {
+    it('should have correct rss.xml content', async function() {
+        let xml = await fs.readFile('../out/blog/rss.xml', 'utf8');
+        assert.exists(xml, 'result exists');
+        assert.isString(xml, 'result isString');
+
+        assert.include(xml, '<link>http://blog-skeleton.akashacms.com/blog/index.html</link>');
+        assert.include(xml, '<image><url>http://akashacms.com/logo.gif</url>');
+        assert.include(xml, '<atom:link href="https://blog-skeleton.akashacms.com/blog/rss.xml"');
+        assert.include(xml, '<link>https://blog-skeleton.akashacms.com/blog/2015/11/test-post-2.html</link>');
+        assert.include(xml, '<guid isPermaLink="true">https://blog-skeleton.akashacms.com/blog/2015/11/test-post-2.html</guid>');
+        assert.include(xml, '<link>https://blog-skeleton.akashacms.com/blog/2015/09/test-post-2.html</link>');
     });
 });
 
@@ -195,5 +212,35 @@ describe('documents and index', function() {
         let blogcfg = config.plugin('akashacms-blog-podcast').options.bloglist['news'];
         let indexes = await config.plugin('akashacms-blog-podcast').findBlogIndexes(config, blogcfg);
         assert.equal(indexes.length, 0);
+    });
+});
+
+describe('rebase blog', function() {
+    it('should render rebased site', async function() {
+        this.timeout(25000);
+        const config = require('../config-rebased.js');
+        
+        let failed = false;
+        let results = await akasha.render(config);
+        for (let result of results) {
+            if (result.error) {
+                failed = true;
+                console.error(result.error);
+            }
+        }
+        assert.isFalse(failed);
+    });
+
+    it('should have correct rss.xml content', async function() {
+        let xml = await fs.readFile('../out-rebased/blog/rss.xml', 'utf8');
+        assert.exists(xml, 'result exists');
+        assert.isString(xml, 'result isString');
+
+        assert.include(xml, '<link>http://blog-skeleton.akashacms.com/rebased/to/blog/index.html</link>');
+        assert.include(xml, '<image><url>http://akashacms.com/logo.gif</url>');
+        assert.include(xml, '<atom:link href="https://blog-skeleton.akashacms.com/rebased/to/blog/rss.xml"');
+        assert.include(xml, '<link>https://blog-skeleton.akashacms.com/rebased/to/blog/2015/11/test-post-2.html</link>');
+        assert.include(xml, '<guid isPermaLink="true">https://blog-skeleton.akashacms.com/rebased/to/blog/2015/11/test-post-2.html</guid>');
+        assert.include(xml, '<link>https://blog-skeleton.akashacms.com/rebased/to/blog/2015/09/test-post-2.html</link>');
     });
 });
