@@ -27,7 +27,7 @@ config
 config.rootURL("https://blog-skeleton.akashacms.com");
 
 config
-    .use(require('akashacms-theme-bootstrap'))
+    .use(require('@akashacms/theme-bootstrap'))
     .use(require('akashacms-base'))
     .use(require('akashacms-breadcrumbs'))
     .use(require('akashacms-booknav'))
