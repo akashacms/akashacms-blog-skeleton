@@ -20,7 +20,7 @@
     "url": "git://github.com/akashacms/akashacms-blog-skeleton.git"
   },
   "dependencies": {
-    "akashacms-base": "akashacms/akashacms-base",
+    "@akashacms/plugins-base": "akashacms/akashacms-base",
     "akashacms-blog-podcast": "akashacms/akashacms-blog-podcast",
     "akashacms-booknav": "akashacms/akashacms-booknav",
     "akashacms-breadcrumbs": "akashacms/akashacms-breadcrumbs",
