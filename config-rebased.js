@@ -27,14 +27,14 @@ config
 config.rootURL("https://blog-skeleton.akashacms.com/rebased/to/");
 
 config
-    .use(require('akashacms-theme-bootstrap'))
-    .use(require('akashacms-base'))
+    .use(require('@akashacms/theme-bootstrap'))
+    .use(require('@akashacms/plugins-base'), {
+        generateSitemapFlag: true
+    })
     .use(require('akashacms-breadcrumbs'))
     .use(require('akashacms-booknav'))
     .use(require('akashacms-embeddables'))
     .use(require('akashacms-blog-podcast'));
-
-config.plugin("akashacms-base").generateSitemap(config, true);
 
 config
     .addFooterJavaScript({
