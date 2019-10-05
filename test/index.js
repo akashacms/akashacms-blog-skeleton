@@ -113,9 +113,9 @@ describe('check pages', function() {
         assert.include($('article strong').html(), 'This is a blog teaser');
         assert.include($('article').html(), 'Blog content');
 
-        assert.include($('.blog-prev-next-wrapper .blog-prev-link[href="test-post-2.html"] span').html(),
+        assert.include($('.blog-prev-next-wrapper .blog-prev-link[href="test-post-2.html"] ').html(),
             'Test Post 2');
-        assert.include($('.blog-prev-next-wrapper .blog-next-link[href="../11/test-post-2.html"] span').html(),
+        assert.include($('.blog-prev-next-wrapper .blog-next-link[href="../11/test-post-2.html"] ').html(),
             'Test Post 2');
     });
 
