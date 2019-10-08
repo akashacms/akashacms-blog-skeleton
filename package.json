@@ -23,7 +23,7 @@
     "@akashacms/plugins-base": "akashacms/akashacms-base",
     "akashacms-blog-podcast": "akashacms/akashacms-blog-podcast",
     "@akashacms/plugins-booknav": "akashacms/akashacms-booknav",
-    "akashacms-breadcrumbs": "akashacms/akashacms-breadcrumbs",
+    "@akashacms/plugins-breadcrumbs": "akashacms/akashacms-breadcrumbs",
     "akashacms-embeddables": "akashacms/akashacms-embeddables",
     "@akashacms/theme-bootstrap": "akashacms/akashacms-theme-bootstrap",
     "akasharender": "akashacms/akasharender",
