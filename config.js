@@ -32,7 +32,7 @@ config
         generateSitemapFlag: true
     })
     .use(require('akashacms-breadcrumbs'))
-    .use(require('akashacms-booknav'))
+    .use(require('@akashacms/plugins-booknav'))
     .use(require('akashacms-embeddables'))
     .use(require('akashacms-blog-podcast'));
 
