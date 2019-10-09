@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@akashacms/plugins-base": "akashacms/akashacms-base",
-    "akashacms-blog-podcast": "akashacms/akashacms-blog-podcast",
+    "@akashacms/plugins-blog-podcast": "akashacms/akashacms-blog-podcast",
     "@akashacms/plugins-booknav": "akashacms/akashacms-booknav",
     "@akashacms/plugins-breadcrumbs": "akashacms/akashacms-breadcrumbs",
     "@akashacms/plugins-embeddables": "akashacms/akashacms-embeddables",

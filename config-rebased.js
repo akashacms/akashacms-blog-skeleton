@@ -34,7 +34,7 @@ config
     .use(require('@akashacms/plugins-breadcrumbs'))
     .use(require('@akashacms/plugins-booknav'))
     .use(require('akashacms-embeddables'))
-    .use(require('akashacms-blog-podcast'));
+    .use(require('@akashacms/plugins-blog-podcast'));
 
 config
     .addFooterJavaScript({
@@ -58,7 +58,7 @@ config.setMahabhutaConfig({
     recognizeCDATA: true
 });
 
-config.plugin('akashacms-blog-podcast')
+config.plugin('@akashacms/plugins-blog-podcast')
     .addBlogPodcast(config, "news", {
         rss: {
             title: "AkashaCMS Example Blog",
@@ -79,7 +79,7 @@ config.plugin('akashacms-blog-podcast')
         }
     });
 
-config.plugin('akashacms-blog-podcast')
+config.plugin('@akashacms/plugins-blog-podcast')
     .addBlogPodcast(config, "news-2", {
         rss: {
             title: "AkashaCMS Example Blog #2",
