@@ -33,7 +33,7 @@ config
     })
     .use(require('@akashacms/plugins-breadcrumbs'))
     .use(require('@akashacms/plugins-booknav'))
-    .use(require('akashacms-embeddables'))
+    .use(require('@akashacms/plugins-embeddables'))
     .use(require('@akashacms/plugins-blog-podcast'));
 
 config
