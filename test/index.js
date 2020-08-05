@@ -58,7 +58,7 @@ describe('check pages', function() {
         assert.include($('head link[rel="canonical"]').attr('href'), 
                 'https://blog-skeleton.akashacms.com/index.html');
         assert.include($('head link[rel="sitemap"]').attr('href'), 
-                '/sitemap.xml');
+                'sitemap.xml');
 
         assert.include($('body header h1').html(), 
                 'Example blog/podcast website for AkashaCMS');
