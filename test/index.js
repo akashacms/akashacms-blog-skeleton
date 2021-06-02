@@ -9,6 +9,16 @@ const config = require('../config.js');
  */
 
 describe('build site', function() {
+    it('should run setup', async function() {
+        this.timeout(75000);
+        await config.setup();
+    });
+
+    it('should copy assets', async function() {
+        this.timeout(75000);
+        await config.copyAssets();
+    });
+
     it('should build site', async function() {
         this.timeout(25000);
         let failed = false;
@@ -198,10 +208,10 @@ describe('documents and index', function() {
         let blogcfg = config.plugin('@akashacms/plugins-blog-podcast').options.bloglist['news'];
         let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg);
         assert.equal(documents.length, 4);
-        assert.equal(documents[0].docpath, 'blog/2015/11/test-post-2.html.md');
-        assert.equal(documents[1].docpath, 'blog/2015/11/test-post-1.html.md');
-        assert.equal(documents[2].docpath, 'blog/2015/09/test-post-2.html.md');
-        assert.equal(documents[3].docpath, 'blog/2015/09/test-post-1.html.md');
+        assert.equal(documents[0].path, 'blog/2015/11/test-post-2.html.md');
+        assert.equal(documents[1].path, 'blog/2015/11/test-post-1.html.md');
+        assert.equal(documents[2].path, 'blog/2015/09/test-post-2.html.md');
+        assert.equal(documents[3].path, 'blog/2015/09/test-post-1.html.md');
     });
 
     it('should have correct index', async function() {
@@ -227,6 +237,7 @@ describe('rebase blog', function() {
         assert.isFalse(failed);
     });
 
+/*
     it('should have correct rss.xml content', async function() {
         let xml = await fs.readFile('../out-rebased/blog/rss.xml', 'utf8');
         assert.exists(xml, 'result exists');
@@ -238,5 +249,12 @@ describe('rebase blog', function() {
         assert.include(xml, '<link>https://blog-skeleton.akashacms.com/rebased/to/blog/2015/11/test-post-2.html</link>');
         assert.include(xml, '<guid isPermaLink="true">https://blog-skeleton.akashacms.com/rebased/to/blog/2015/11/test-post-2.html</guid>');
         assert.include(xml, '<link>https://blog-skeleton.akashacms.com/rebased/to/blog/2015/09/test-post-2.html</link>');
+    });
+    */
+});
+
+describe('Finish', function() {
+    it('should close the configuration', async function() {
+        await config.close();
     });
 });

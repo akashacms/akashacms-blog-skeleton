@@ -72,7 +72,7 @@ config.plugin('@akashacms/plugins-blog-podcast')
             categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
         },
         rssurl: "/blog/rss.xml",
-        rootPath: "blog",
+        rootPath: "blog/",
         matchers: {
             layouts: [ "blog.html.ejs" ],
             path: /^blog\//
@@ -93,7 +93,7 @@ config.plugin('@akashacms/plugins-blog-podcast')
             categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
         },
         rssurl: "/blog-2/rss.xml",
-        rootPath: "blog-2",
+        rootPath: "blog-2/",
         matchers: {
             layouts: [ "blog.html.ejs" ],
             path: /^blog-2\//

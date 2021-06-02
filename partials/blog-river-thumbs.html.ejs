@@ -6,18 +6,18 @@
         %>
         <div class="blog-item">
             <!-- add teaser thumbnail -->
-            <a href="/<%= doc.renderpath %>"><h3><%= doc.metadata.title %></h3></a>
-            <% if (doc.metadata.teaser) { %>
-                <p><%= doc.metadata.teaser %></p>
+            <a href="/<%= doc.renderPath %>"><h3><%= doc.docMetadata.title %></h3></a>
+            <% if (doc.docMetadata.teaser) { %>
+                <p><%= doc.docMetadata.teaser %></p>
             <% } %>
             <%
-            // if (doc.metadata.videoUrls) {
-            //     % ><a href="/< %= doc.renderpath % >">
-            //         <h3>< %= doc.metadata.title % ></h3>
-            //         <youtube-thumbnail href="< %= doc.metadata.videoUrls[0].url % >" title="< %= doc.metadata.title % >"></youtube-thumbnail>
+            // if (doc.docMetadata.videoUrls) {
+            //     % ><a href="/< %= doc.renderPath % >">
+            //         <h3>< %= doc.docMetadata.title % ></h3>
+            //         <youtube-thumbnail href="< %= doc.docMetadata.videoUrls[0].url % >" title="< %= doc.docMetadata.title % >"></youtube-thumbnail>
             //     </a>< %
             // } else {
-            //     % ><a href="/< %= doc.renderpath % >"><h3>< %= doc.metadata.title % ></h3></a>< %
+            //     % ><a href="/< %= doc.renderPath % >"><h3>< %= doc.docMetadata.title % ></h3></a>< %
             // }
             %>
         </div>
