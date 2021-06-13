@@ -9,9 +9,23 @@ const config = require('../config.js');
  */
 
 describe('build site', function() {
+
     it('should run setup', async function() {
         this.timeout(75000);
-        await config.setup();
+        await akasha.cacheSetup(config);
+        await Promise.all([
+            akasha.setupDocuments(config),
+            akasha.setupAssets(config),
+            akasha.setupLayouts(config),
+            akasha.setupPartials(config)
+        ])
+        let filecache = await akasha.filecache;
+        await Promise.all([
+            filecache.documents.isReady(),
+            filecache.assets.isReady(),
+            filecache.layouts.isReady(),
+            filecache.partials.isReady()
+        ]);
     });
 
     it('should copy assets', async function() {
@@ -208,10 +222,10 @@ describe('documents and index', function() {
         let blogcfg = config.plugin('@akashacms/plugins-blog-podcast').options.bloglist['news'];
         let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg);
         assert.equal(documents.length, 4);
-        assert.equal(documents[0].path, 'blog/2015/11/test-post-2.html.md');
-        assert.equal(documents[1].path, 'blog/2015/11/test-post-1.html.md');
-        assert.equal(documents[2].path, 'blog/2015/09/test-post-2.html.md');
-        assert.equal(documents[3].path, 'blog/2015/09/test-post-1.html.md');
+        assert.equal(documents[0].vpath, 'blog/2015/11/test-post-2.html.md');
+        assert.equal(documents[1].vpath, 'blog/2015/11/test-post-1.html.md');
+        assert.equal(documents[2].vpath, 'blog/2015/09/test-post-2.html.md');
+        assert.equal(documents[3].vpath, 'blog/2015/09/test-post-1.html.md');
     });
 
     it('should have correct index', async function() {
@@ -255,6 +269,7 @@ describe('rebase blog', function() {
 
 describe('Finish', function() {
     it('should close the configuration', async function() {
-        await config.close();
+        this.timeout(75000);
+        await akasha.closeCaches();
     });
 });
