@@ -62,6 +62,99 @@ describe('check feed', function() {
     });
 });
 
+describe('check plugin API', function() {
+    let filecache;
+    let plugin;
+    before(async function() {
+        filecache = await akasha.filecache;
+        plugin = config.plugin('@akashacms/plugins-blog-podcast');
+    });
+
+    it('should correctly verify blog tags', async function() {
+        assert.isOk(plugin.isBlogtag('news'));
+        assert.isOk(plugin.isBlogtag('news-2'));
+        assert.isNotOk(plugin.isBlogtag('nodejs'));
+    });
+
+    it('should find correct blog blog-2/2015/09/test-post-1.html.md', async function() {
+        const vpinfo = filecache.documents.find('blog-2/2015/09/test-post-1.html.md');
+        assert.isOk(vpinfo);
+        assert.isNotArray(vpinfo);
+
+        let bloginfo = plugin.findBlogForVPInfo(vpinfo);
+        assert.isOk(bloginfo);
+        assert.isObject(bloginfo);
+        assert.equal(bloginfo.blogkey, 'news-2');
+    });
+
+    it('should find correct blog blog/2015/09/test-post-2.html.md', async function() {
+        const vpinfo = filecache.documents.find('blog/2015/09/test-post-2.html.md');
+        assert.isOk(vpinfo);
+        assert.isNotArray(vpinfo);
+
+        let bloginfo = plugin.findBlogForVPInfo(vpinfo);
+        assert.isOk(bloginfo);
+        assert.isObject(bloginfo);
+        assert.equal(bloginfo.blogkey, 'news');
+    });
+
+    it('should not find blog for blog/2015/index.html.md', async function() {
+        const vpinfo = filecache.documents.find('blog/2015/index.html.md');
+        assert.isOk(vpinfo);
+        assert.isNotArray(vpinfo);
+
+        let bloginfo = plugin.findBlogForVPInfo(vpinfo);
+        assert.isNotOk(bloginfo);
+    });
+
+    it('should find blog items for news', async function() {
+        const blogcfg = plugin.blogcfg('news');
+        assert.isOk(blogcfg);
+        assert.isObject(blogcfg);
+
+        const docs = await plugin.NEWfindBlogDocs(config, blogcfg, 'news');
+        assert.isOk(docs);
+        assert.isArray(docs);
+
+        assert.equal(docs.length, 4);
+
+        assert.equal(docs[0].docpath, 'blog/2015/11/test-post-2.html.md');
+        assert.equal(docs[0].vpath, 'blog/2015/11/test-post-2.html.md');
+
+        assert.equal(docs[1].docpath, 'blog/2015/11/test-post-1.html.md');
+        assert.equal(docs[1].vpath, 'blog/2015/11/test-post-1.html.md');
+
+        assert.equal(docs[2].docpath, 'blog/2015/09/test-post-2.html.md');
+        assert.equal(docs[2].vpath, 'blog/2015/09/test-post-2.html.md');
+
+        assert.equal(docs[3].docpath, 'blog/2015/09/test-post-1.html.md');
+        assert.equal(docs[3].vpath, 'blog/2015/09/test-post-1.html.md');
+
+        // console.log(docs);
+    });
+
+    it('should find blog items for news blog/2015/09', async function() {
+        const blogcfg = plugin.blogcfg('news');
+        assert.isOk(blogcfg);
+        assert.isObject(blogcfg);
+
+        const docs = await plugin.NEWfindBlogDocs(config, blogcfg, 'news', 'blog/2015/09');
+        assert.isOk(docs);
+        assert.isArray(docs);
+
+        assert.equal(docs.length, 2);
+
+        assert.equal(docs[0].docpath, 'blog/2015/09/test-post-2.html.md');
+        assert.equal(docs[0].vpath, 'blog/2015/09/test-post-2.html.md');
+
+        assert.equal(docs[1].docpath, 'blog/2015/09/test-post-1.html.md');
+        assert.equal(docs[1].vpath, 'blog/2015/09/test-post-1.html.md');
+
+        // console.log(docs);
+    });
+
+});
+
 describe('check pages', function() {
     it('should have correct home page', async function() {
 
@@ -220,7 +313,7 @@ describe('check pages', function() {
 describe('documents and index', function() {
     it('should have correct documents', async function() {
         let blogcfg = config.plugin('@akashacms/plugins-blog-podcast').options.bloglist['news'];
-        let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg);
+        let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg, 'news');
         assert.equal(documents.length, 4);
         assert.equal(documents[0].vpath, 'blog/2015/11/test-post-2.html.md');
         assert.equal(documents[1].vpath, 'blog/2015/11/test-post-1.html.md');
