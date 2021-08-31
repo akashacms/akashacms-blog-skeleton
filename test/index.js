@@ -112,7 +112,7 @@ describe('check plugin API', function() {
         assert.isOk(blogcfg);
         assert.isObject(blogcfg);
 
-        const docs = await plugin.NEWfindBlogDocs(config, blogcfg, 'news');
+        const docs = await plugin.findBlogDocs(config, blogcfg, 'news');
         assert.isOk(docs);
         assert.isArray(docs);
 
@@ -138,7 +138,7 @@ describe('check plugin API', function() {
         assert.isOk(blogcfg);
         assert.isObject(blogcfg);
 
-        const docs = await plugin.NEWfindBlogDocs(config, blogcfg, 'news', 'blog/2015/09');
+        const docs = await plugin.findBlogDocs(config, blogcfg, 'news', 'blog/2015/09');
         assert.isOk(docs);
         assert.isArray(docs);
 
