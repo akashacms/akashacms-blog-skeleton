@@ -139,18 +139,35 @@ describe('check plugin API', function() {
         assert.isObject(blogcfg);
 
         const docs = await plugin.findBlogDocs(config, blogcfg, 'news', 'blog/2015/09');
+        const docpaths = docs.map(doc => {
+            return {
+                vpath: doc.vpath, docpath: doc.docpath
+            };
+        });
+        // console.log(docpaths);
         assert.isOk(docs);
         assert.isArray(docs);
 
-        assert.equal(docs.length, 2);
+        assert.equal(docs.length, 4);
 
-        assert.equal(docs[0].docpath, 'blog/2015/09/test-post-2.html.md');
-        assert.equal(docs[0].vpath, 'blog/2015/09/test-post-2.html.md');
-
-        assert.equal(docs[1].docpath, 'blog/2015/09/test-post-1.html.md');
-        assert.equal(docs[1].vpath, 'blog/2015/09/test-post-1.html.md');
-
-        // console.log(docs);
+        assert.deepEqual(docpaths, [
+            {
+              vpath: 'blog/2015/11/test-post-2.html.md',
+              docpath: 'blog/2015/11/test-post-2.html.md'
+            },
+            {
+              vpath: 'blog/2015/11/test-post-1.html.md',
+              docpath: 'blog/2015/11/test-post-1.html.md'
+            },
+            {
+              vpath: 'blog/2015/09/test-post-2.html.md',
+              docpath: 'blog/2015/09/test-post-2.html.md'
+            },
+            {
+              vpath: 'blog/2015/09/test-post-1.html.md',
+              docpath: 'blog/2015/09/test-post-1.html.md'
+            }
+        ]);
     });
 
 });
