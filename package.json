@@ -9,10 +9,13 @@
   "version": "0.7.6",
   "main": "config.js",
   "scripts": {
-    "prebuild": "rm -rf out/* && mkdir -p out && akasharender copy-assets config.js",
-    "build": "akasharender render config.js",
-    "preview": "cd out && ws --log.format dev",
-    "pretest": "npm run build",
+    "clean": "rm -rf out/* && mkdir -p out",
+    "build": "npm-run-all build:copy build:render",
+    "build:copy": "akasharender copy-assets config.js",
+    "build:render": "akasharender render config.js",
+    "watch": "npm-run-all --parallel watcher preview",
+    "watcher": "akasharender watch config.js",
+    "preview": "live-server out",
     "test": "cd test && mocha ./index"
   },
   "repository": {
@@ -27,14 +30,15 @@
     "@akashacms/plugins-embeddables": "akashacms/akashacms-embeddables",
     "@akashacms/theme-bootstrap": "akashacms/akashacms-theme-bootstrap#watcher",
     "akasharender": "akashacms/akasharender#watcher",
-    "bootstrap": "^4.5.x",
-    "jquery": "^3.5.x",
-    "popper.js": ">=1.16.x",
+    "bootstrap": "^4.6.x",
+    "chai": "^4.3.x",
     "globfs": "*",
-    "oembed": "^0.1.0",
     "html-minifier": "^3.1.1",
-    "local-web-server": "^3.0.7",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "jquery": "^3.6.x",
+    "live-server": "^1.2.1",
+    "mocha": "^9.1.0",
+    "npm-run-all": "^4.1.5",
+    "oembed": "^0.1.0",
+    "popper.js": ">=1.16.x"
   }
 }
