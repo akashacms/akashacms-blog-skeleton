@@ -23,22 +23,19 @@
     "url": "git://github.com/akashacms/akashacms-blog-skeleton.git"
   },
   "dependencies": {
-    "@akashacms/plugins-base": "akashacms/akashacms-base#watcher",
-    "@akashacms/plugins-blog-podcast": "akashacms/akashacms-blog-podcast#watcher",
-    "@akashacms/plugins-booknav": "akashacms/akashacms-booknav",
-    "@akashacms/plugins-breadcrumbs": "akashacms/akashacms-breadcrumbs",
-    "@akashacms/plugins-embeddables": "akashacms/akashacms-embeddables",
-    "@akashacms/theme-bootstrap": "akashacms/akashacms-theme-bootstrap#watcher",
-    "akasharender": "akashacms/akasharender#watcher",
+    "@akashacms/plugins-base": "^0.8.x",
+    "@akashacms/plugins-blog-podcast": "^0.8.x",
+    "@akashacms/plugins-booknav": "^0.8.x",
+    "@akashacms/plugins-breadcrumbs": "^0.8.x",
+    "@akashacms/plugins-embeddables": "^0.8.x",
+    "@akashacms/theme-bootstrap": "^0.8.x",
+    "akasharender": "^0.8.x",
     "bootstrap": "^4.6.x",
     "chai": "^4.3.x",
-    "globfs": "*",
-    "html-minifier": "^3.1.1",
     "jquery": "^3.6.x",
-    "live-server": "^1.2.1",
+    "@compodoc/live-server": "^1.2.x",
     "mocha": "^9.1.0",
     "npm-run-all": "^4.1.5",
-    "oembed": "^0.1.0",
     "popper.js": ">=1.16.x"
   }
 }
