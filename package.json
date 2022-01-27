@@ -9,11 +9,15 @@
   "version": "0.7.6",
   "main": "config.js",
   "scripts": {
-    "prebuild": "rm -rf out/* && mkdir -p out && akasharender copy-assets config.js",
-    "build": "akasharender render config.js",
-    "preview": "cd out && ws --log.format dev",
+    "clean": "rm -rf out/* && mkdir -p out",
+    "build": "npm-run-all clean build:copy build:site",
+    "build:copy": "akasharender copy-assets config.js",
+    "build:site": "akasharender render config.js",
     "pretest": "npm run build",
-    "test": "cd test && mocha ./index"
+    "test": "cd test && mocha ./index",
+    "watch": "npm-run-all --parallel watcher preview",
+    "watcher": "akasharender watch config.js",
+    "preview": "live-server out"
   },
   "repository": {
     "type": "git",
@@ -26,15 +30,16 @@
     "@akashacms/plugins-breadcrumbs": "akashacms/akashacms-breadcrumbs",
     "@akashacms/plugins-embeddables": "akashacms/akashacms-embeddables",
     "@akashacms/theme-bootstrap": "akashacms/akashacms-theme-bootstrap",
+    "@compodoc/live-server": "^1.2.3",
     "akasharender": "akashacms/akasharender",
     "bootstrap": "^4.5.x",
-    "jquery": "^3.5.x",
-    "popper.js": ">=1.16.x",
-    "globfs": "*",
-    "oembed": "^0.1.0",
-    "html-minifier": "^3.1.1",
-    "local-web-server": "^3.0.7",
     "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "html-minifier": "^3.1.1",
+    "jquery": "^3.5.x",
+    "local-web-server": "^3.0.7",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.5",
+    "oembed": "^0.1.0",
+    "popper.js": ">=1.16.x"
   }
 }

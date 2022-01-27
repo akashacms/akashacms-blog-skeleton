@@ -9,6 +9,30 @@ const config = require('../config.js');
  */
 
 describe('build site', function() {
+
+    it('should run setup', async function() {
+        this.timeout(75000);
+        await akasha.cacheSetupComplete(config);
+        /* await Promise.all([
+            akasha.setupDocuments(config),
+            akasha.setupAssets(config),
+            akasha.setupLayouts(config),
+            akasha.setupPartials(config)
+        ])
+        let filecache = await _filecache;
+        await Promise.all([
+            filecache.documents.isReady(),
+            filecache.assets.isReady(),
+            filecache.layouts.isReady(),
+            filecache.partials.isReady()
+        ]); */
+    });
+
+    it('should copy assets', async function() {
+        this.timeout(75000);
+        await config.copyAssets();
+    });
+
     it('should build site', async function() {
         this.timeout(25000);
         let failed = false;
@@ -156,11 +180,9 @@ describe('check pages', function() {
         assert.include($('a[href="../../rss.xml"] img').attr('src'), 
                 '../../../img/rss_button.gif');
         
-        assert.include($('a[href="../11/test-post-2.html"] h2').html(), 
-                'Test Post 2');
+        assert.isNotOk($('a[href="../11/test-post-2.html"] h2').html());
         
-        assert.include($('a[href="../11/test-post-1.html"] h2').html(), 
-                'Test Post 1');
+        assert.isNotOk($('a[href="../11/test-post-1.html"] h2').html());
         
         assert.include($('a[href="test-post-2.html"] h2').html(), 
                 'Test Post 2');
@@ -196,7 +218,7 @@ describe('check pages', function() {
 describe('documents and index', function() {
     it('should have correct documents', async function() {
         let blogcfg = config.plugin('@akashacms/plugins-blog-podcast').options.bloglist['news'];
-        let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg);
+        let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg, 'news');
         assert.equal(documents.length, 4);
         assert.equal(documents[0].docpath, 'blog/2015/11/test-post-2.html.md');
         assert.equal(documents[1].docpath, 'blog/2015/11/test-post-1.html.md');
@@ -211,10 +233,44 @@ describe('documents and index', function() {
     });
 });
 
+describe('finish blog', function() {
+        it('should close configuration', async function() {
+            await akasha.closeCaches();
+        });
+});
+
 describe('rebase blog', function() {
+    let config;
+
+    it('should load rebased config', function() {
+        config = require('../config-rebased.js');
+    });
+
+    it('should run setup', async function() {
+        this.timeout(75000);
+        await akasha.cacheSetupComplete(config);
+        /* await Promise.all([
+            akasha.setupDocuments(config),
+            akasha.setupAssets(config),
+            akasha.setupLayouts(config),
+            akasha.setupPartials(config)
+        ])
+        let filecache = await _filecache;
+        await Promise.all([
+            filecache.documents.isReady(),
+            filecache.assets.isReady(),
+            filecache.layouts.isReady(),
+            filecache.partials.isReady()
+        ]); */
+    });
+
+    it('should copy assets', async function() {
+        this.timeout(75000);
+        await config.copyAssets();
+    });
+
     it('should render rebased site', async function() {
         this.timeout(25000);
-        const config = require('../config-rebased.js');
         
         let failed = false;
         let results = await akasha.render(config);
@@ -227,7 +283,7 @@ describe('rebase blog', function() {
         assert.isFalse(failed);
     });
 
-    it('should have correct rss.xml content', async function() {
+    /* it('should have correct rss.xml content', async function() {
         let xml = await fs.readFile('../out-rebased/blog/rss.xml', 'utf8');
         assert.exists(xml, 'result exists');
         assert.isString(xml, 'result isString');
@@ -238,5 +294,9 @@ describe('rebase blog', function() {
         assert.include(xml, '<link>https://blog-skeleton.akashacms.com/rebased/to/blog/2015/11/test-post-2.html</link>');
         assert.include(xml, '<guid isPermaLink="true">https://blog-skeleton.akashacms.com/rebased/to/blog/2015/11/test-post-2.html</guid>');
         assert.include(xml, '<link>https://blog-skeleton.akashacms.com/rebased/to/blog/2015/09/test-post-2.html</link>');
+    }); */
+
+    it('should close configuration', async function() {
+        await akasha.closeCaches();
     });
 });
