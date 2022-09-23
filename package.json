@@ -24,14 +24,14 @@
     "url": "git://github.com/akashacms/akashacms-blog-skeleton.git"
   },
   "dependencies": {
-    "@akashacms/plugins-base": "akashacms/akashacms-base",
-    "@akashacms/plugins-blog-podcast": "akashacms/akashacms-blog-podcast",
+    "@akashacms/plugins-base": "akashacms/akashacms-base#0.9",
+    "@akashacms/plugins-blog-podcast": "akashacms/akashacms-blog-podcast#0.9",
     "@akashacms/plugins-booknav": "akashacms/akashacms-booknav",
     "@akashacms/plugins-breadcrumbs": "akashacms/akashacms-breadcrumbs",
-    "@akashacms/plugins-embeddables": "akashacms/akashacms-embeddables",
+    "@akashacms/plugins-embeddables": "akashacms/akashacms-embeddables#lokijs",
     "@akashacms/theme-bootstrap": "akashacms/akashacms-theme-bootstrap",
     "@compodoc/live-server": "^1.2.3",
-    "akasharender": "akashacms/akasharender",
+    "akasharender": "akashacms/akasharender#0.9",
     "bootstrap": "^4.5.x",
     "chai": "^4.1.2",
     "html-minifier": "^3.1.1",

@@ -12,7 +12,8 @@ describe('build site', function() {
 
     it('should run setup', async function() {
         this.timeout(75000);
-        await akasha.cacheSetupComplete(config);
+        await akasha.setup(config);
+        // await akasha.fileCachesReady(config);
         /* await Promise.all([
             akasha.setupDocuments(config),
             akasha.setupAssets(config),
@@ -108,6 +109,7 @@ describe('check pages', function() {
         let { html, $ } = await akasha.readRenderedFile(config, 
                 '/blog/2015/09/test-post-1.html');
 
+        // console.log(html);
         assert.exists(html, 'result exists');
         assert.isString(html, 'result isString');
 
@@ -135,12 +137,14 @@ describe('check pages', function() {
                 'Blog index');
 
         assert.include($('article strong').html(), 'This is a blog teaser');
-        assert.include($('article').html(), 'Blog content');
 
-        assert.include($('.blog-prev-next-wrapper .blog-prev-link[href="test-post-2.html"] ').html(),
+        // console.log($('.blog-prev-next-wrapper').html());
+        // console.log($('.blog-prev-next-wrapper .blog-next-link[href="test-post-2.html"]').html());
+
+        assert.include($('.blog-prev-next-wrapper .blog-next-link[href="test-post-2.html"] ').html(),
             'Test Post 2');
-        assert.include($('.blog-prev-next-wrapper .blog-next-link[href="../11/test-post-2.html"] ').html(),
-            'Test Post 2');
+        assert.include($('.blog-prev-next-wrapper .blog-prev-link[href="../../2016/09/test-post-1.html"] ').html(),
+            'Test Post 1');
     });
 
     it('should have correct blog 1 index page', async function() {
@@ -219,11 +223,27 @@ describe('documents and index', function() {
     it('should have correct documents', async function() {
         let blogcfg = config.plugin('@akashacms/plugins-blog-podcast').options.bloglist['news'];
         let documents = await config.plugin('@akashacms/plugins-blog-podcast').findBlogDocs(config, blogcfg, 'news');
-        assert.equal(documents.length, 4);
-        assert.equal(documents[0].docpath, 'blog/2015/11/test-post-2.html.md');
-        assert.equal(documents[1].docpath, 'blog/2015/11/test-post-1.html.md');
-        assert.equal(documents[2].docpath, 'blog/2015/09/test-post-2.html.md');
-        assert.equal(documents[3].docpath, 'blog/2015/09/test-post-1.html.md');
+        assert.equal(documents.length, 16);
+        // console.log(documents.map(d => { return { docpath: d.docpath }}));
+        assert.deepEqual(documents.map(d => { return { docpath: d.docpath }; }),
+        [
+            { docpath: 'blog/2018/11/test-post-2.html.md' },
+            { docpath: 'blog/2018/11/test-post-1.html.md' },
+            { docpath: 'blog/2018/09/test-post-2.html.md' },
+            { docpath: 'blog/2018/09/test-post-1.html.md' },
+            { docpath: 'blog/2017/11/test-post-2.html.md' },
+            { docpath: 'blog/2017/11/test-post-1.html.md' },
+            { docpath: 'blog/2017/09/test-post-2.html.md' },
+            { docpath: 'blog/2017/09/test-post-1.html.md' },
+            { docpath: 'blog/2016/11/test-post-2.html.md' },
+            { docpath: 'blog/2016/11/test-post-1.html.md' },
+            { docpath: 'blog/2016/09/test-post-2.html.md' },
+            { docpath: 'blog/2016/09/test-post-1.html.md' },
+            { docpath: 'blog/2015/09/test-post-1.html.md' },
+            { docpath: 'blog/2015/09/test-post-2.html.md' },
+            { docpath: 'blog/2015/11/test-post-1.html.md' },
+            { docpath: 'blog/2015/11/test-post-2.html.md' }
+          ]);
     });
 
     it('should have correct index', async function() {
@@ -248,7 +268,7 @@ describe('rebase blog', function() {
 
     it('should run setup', async function() {
         this.timeout(75000);
-        await akasha.cacheSetupComplete(config);
+        await akasha.setup(config);
         /* await Promise.all([
             akasha.setupDocuments(config),
             akasha.setupAssets(config),
