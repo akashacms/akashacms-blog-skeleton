@@ -1,0 +1,15 @@
+<div class="blog-river">
+    <a href="{{ feedUrl }}"><img src="/img/rss_button.gif" align="right" width="50"/></a>
+    {% for doc in documents %}
+        <span class="blog-item">
+            <a href="/{{ doc.renderPath }}">{{ doc.metadata.title}}</a>
+            ({{ doc.metadata.publicationDate }})
+            {% if doc.metadata.teaser %}
+                {{ doc.metadata.teaser }}
+            {% endif %}
+            {% if doc.metadata.videoUrls %}
+            <youtube-thumbnail href="{{ doc.metadata.videoUrls[0].url }}" title="{{ doc.metadata.title }}"></youtube-thumbnail>
+            {% endif %}
+        </span>
+    {% endfor %}
+</div>
