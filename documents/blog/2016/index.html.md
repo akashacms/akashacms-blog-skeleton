@@ -1,5 +1,5 @@
 ---
 layout: index-blog.html.ejs
-title: Blog index for 2015
+title: Blog index for 2016
 blogtag: news
 ---
