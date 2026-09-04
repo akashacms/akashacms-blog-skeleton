@@ -19,14 +19,6 @@ config.configDir = __dirname;
 
 config
     .addAssetsDir('assets')
-    .addAssetsDir({
-        src: 'node_modules/bootstrap/dist',
-        dest: 'vendor/bootstrap'
-    })
-   .addAssetsDir({
-        src: 'node_modules/jquery/dist',
-        dest: 'vendor/jquery'
-    })
     .addLayoutsDir('layouts')
     .addDocumentsDir('documents')
     .addPartialsDir('partials')
@@ -45,18 +37,6 @@ config
     .use(BlogPodcastPlugin);
 
 config
-    .addFooterJavaScript({
-        href: "/vendor/jquery/jquery.min.js"
-    })
-    .addFooterJavaScript({
-        href: "/vendor/bootstrap/js/bootstrap.min.js"
-    })
-    .addStylesheet({
-        href: "/vendor/bootstrap/css/bootstrap.min.css"
-    })
-    .addStylesheet({
-        href: "/vendor/bootstrap/css/bootstrap-theme.min.css"
-    })
     .addStylesheet({
         href: "/style.css"
     });
@@ -86,9 +66,6 @@ config.plugin('@akashacms/plugins-blog-podcast')
         }
     });
 
-        // rootPath  "blog",
-            // path: /^blog\//
-
 config.plugin('@akashacms/plugins-blog-podcast')
     .addBlogPodcast(config, "news-2", {
         rss: {
@@ -108,10 +85,6 @@ config.plugin('@akashacms/plugins-blog-podcast')
             rootPath: 'blog-2/'
         }
     });
-
-
-        // rootPath: "blog-2",
-            // path: /^blog-2\//
 
 config.prepare();
 
