@@ -1,0 +1,5 @@
+---
+layout: index-blog.html.ejs
+title: Blog index for 2016
+blogtag: news
+---

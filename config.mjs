@@ -2,23 +2,23 @@
 
 'use strict';
 
-const util    = require('util');
-const akasha  = require('akasharender');
+import util   from 'node:util';
+import akasha from 'akasharender';
+
+import { ThemeBootstrapPlugin } from '@akashacms/theme-bootstrap';
+import { BasePlugin } from '@akashacms/plugins-base';
+import { BreadcrumbsPlugin } from '@akashacms/plugins-breadcrumbs';
+import { BooknavPlugin } from '@akashacms/plugins-booknav';
+import { EmbeddablesPlugin } from '@akashacms/plugins-embeddables';
+import { BlogPodcastPlugin } from '@akashacms/plugins-blog-podcast';
 
 const config = new akasha.Configuration();
 
+const __dirname = import.meta.dirname;
 config.configDir = __dirname;
 
 config
     .addAssetsDir('assets')
-    .addAssetsDir({
-        src: 'node_modules/bootstrap/dist',
-        dest: 'vendor/bootstrap'
-    })
-   .addAssetsDir({
-        src: 'node_modules/jquery/dist',
-        dest: 'vendor/jquery'
-    })
     .addLayoutsDir('layouts')
     .addDocumentsDir('documents')
     .addPartialsDir('partials')
@@ -27,28 +27,16 @@ config
 config.rootURL("https://blog-skeleton.akashacms.com");
 
 config
-    .use(require('@akashacms/theme-bootstrap'))
-    .use(require('@akashacms/plugins-base'), {
+    .use(ThemeBootstrapPlugin)
+    .use(BasePlugin, {
         generateSitemapFlag: true
     })
-    .use(require('@akashacms/plugins-breadcrumbs'))
-    .use(require('@akashacms/plugins-booknav'))
-    .use(require('@akashacms/plugins-embeddables'))
-    .use(require('@akashacms/plugins-blog-podcast'));
+    .use(BreadcrumbsPlugin)
+    .use(BooknavPlugin)
+    .use(EmbeddablesPlugin)
+    .use(BlogPodcastPlugin);
 
 config
-    .addFooterJavaScript({
-        href: "/vendor/jquery/jquery.min.js"
-    })
-    .addFooterJavaScript({
-        href: "/vendor/bootstrap/js/bootstrap.min.js"
-    })
-    .addStylesheet({
-        href: "/vendor/bootstrap/css/bootstrap.min.css"
-    })
-    .addStylesheet({
-        href: "/vendor/bootstrap/css/bootstrap-theme.min.css"
-    })
     .addStylesheet({
         href: "/style.css"
     });
@@ -72,10 +60,9 @@ config.plugin('@akashacms/plugins-blog-podcast')
             categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
         },
         rssurl: "/blog/rss.xml",
-        rootPath: "blog",
         matchers: {
             layouts: [ "blog.html.ejs" ],
-            path: /^blog\//
+            rootPath: 'blog/'
         }
     });
 
@@ -93,13 +80,12 @@ config.plugin('@akashacms/plugins-blog-podcast')
             categories: [ "Node.js", "Content Management System", "HTML5", "Static website generator" ]
         },
         rssurl: "/blog-2/rss.xml",
-        rootPath: "blog-2",
         matchers: {
             layouts: [ "blog.html.ejs" ],
-            path: /^blog-2\//
+            rootPath: 'blog-2/'
         }
     });
 
 config.prepare();
 
-module.exports = config;
+export default config;
